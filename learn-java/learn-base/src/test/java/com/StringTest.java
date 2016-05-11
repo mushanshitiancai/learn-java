@@ -23,6 +23,17 @@ public class StringTest {
     @Test
     public void replaceTest(){
         Assert.assertEquals("a1b1".replaceFirst("\\d","U"),"aUb1");
-        Assert.assertEquals("a1b1".replaceAll("\\d","U"),"aUbU");
+        Assert.assertEquals("a1b1".replaceAll("\\d", "U"),"aUbU");
+    }
+
+    @Test
+    public void equalsTest(){
+        StringBuilder sb = new StringBuilder("hello");
+
+        // String重写了equals方法,不是String类返回false
+        Assert.assertEquals("hello".equals(sb),false);
+
+        // StringBuilder没有重写equals方法,直接==的
+        Assert.assertEquals(sb.equals("hello"),false);
     }
 }
