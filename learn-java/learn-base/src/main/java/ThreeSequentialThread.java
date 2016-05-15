@@ -2,6 +2,9 @@
  * Created by mazhibin on 16/5/15
  */
 
+import java.io.IOException;
+import java.io.PipedReader;
+import java.io.PipedWriter;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -11,10 +14,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * 题目:三个线程按顺序执行
  */
 public class ThreeSequentialThread {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 //        new Method1().run();
 //        new Method2().run();
-        new Method3().run();
+//        new Method3().run();
+        new Method4().run();
     }
 }
 
@@ -278,6 +282,62 @@ class Method3 {
 
 
 
+        service.shutdown();
+    }
+}
+
+/**
+ * 解法4: 使用管道
+ */
+class Method4 {
+
+    public void run() throws IOException {
+        final PipedWriter writer12 = new PipedWriter();
+        final PipedReader reader12 = new PipedReader(writer12);
+        final PipedWriter writer23 = new PipedWriter();
+        final PipedReader reader23 = new PipedReader(writer23);
+
+        Thread t1 = new Thread(){
+            @Override
+            public void run() {
+                System.out.println("do 1");
+                try {
+                    writer12.write('2');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Thread t2 = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    char v = (char)reader12.read();
+                    System.out.println("do "+v);
+                    writer23.write('3');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Thread t3 = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    char v = (char)reader23.read();
+                    System.out.println("do " + v);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        ExecutorService service = Executors.newCachedThreadPool();
+        service.execute(t3);
+        service.execute(t2);
+        service.execute(t1);
         service.shutdown();
     }
 }
