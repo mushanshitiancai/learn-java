@@ -15,6 +15,8 @@ public class RedisTest {
         System.out.println(v);
     }
 
+// [Redis的Java客户端Jedis的八种调用方式(事务、管道、分布式)介绍 - OPEN 开发经验库](http://www.open-open.com/lib/view/open1410485827242.html)
+
 // redis.clients.jedis.exceptions.JedisDataException:
 // DENIED Redis is running in protected mode because protected mode is enabled,
 // no bind address was specified, no authentication password is requested to clients.

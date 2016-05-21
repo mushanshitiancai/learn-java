@@ -15,10 +15,59 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ThreeSequentialThread {
     public static void main(String[] args) throws InterruptedException, IOException {
+        new Method0().run();
 //        new Method1().run();
 //        new Method2().run();
 //        new Method3().run();
-        new Method4().run();
+//        new Method4().run();
+    }
+}
+
+/**
+ * 解法0: 使用Thread的join
+ */
+class Method0 {
+
+    Thread t1 = new Thread(){
+        @Override
+        public void run() {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("do 1");
+        }
+    };
+    Thread t2 = new Thread(){
+        @Override
+        public void run() {
+            try {
+                t1.join();
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("do 2");
+        }
+    };
+    Thread t3 = new Thread(){
+        @Override
+        public void run() {
+            try {
+                t2.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("do 3");
+        }
+    };
+
+    public void run() throws InterruptedException {
+        // 这种解法需要三个现在按顺序start,因为如果没有start的话,join会直接跳过
+        t1.start();
+        t2.start();
+        t3.start();
     }
 }
 
