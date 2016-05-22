@@ -1,4 +1,4 @@
-/**
+package thread; /**
  * Created by mazhibin on 16/5/15
  */
 
@@ -16,10 +16,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ThreeSequentialThread {
     public static void main(String[] args) throws InterruptedException, IOException {
         new Method0().run();
-//        new Method1().run();
-//        new Method2().run();
-//        new Method3().run();
-//        new Method4().run();
+//        new thread.Method1().run();
+//        new thread.Method2().run();
+//        new thread.Method3().run();
+//        new thread.Method4().run();
     }
 }
 
