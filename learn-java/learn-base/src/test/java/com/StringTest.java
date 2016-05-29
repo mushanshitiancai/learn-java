@@ -36,4 +36,15 @@ public class StringTest {
         // StringBuilder没有重写equals方法,直接==的
         Assert.assertEquals(sb.equals("hello"),false);
     }
+
+    @Test
+    public void plugTest(){
+        String a = "a";
+        String b = a+'v';
+        a+='a';
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(a.length());
+    }
 }
