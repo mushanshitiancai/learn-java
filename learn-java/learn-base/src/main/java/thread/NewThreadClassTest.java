@@ -12,7 +12,9 @@ public class NewThreadClassTest {
 //        new CountDownLatchTest().run();
 //        new CyclicBarrierTest().run();
 //        new DelayQueueTest().run();
-        new ScheduledExecutorServiceTest().run();
+//        new ScheduledExecutorServiceTest().run();
+//        new SemaphoreTest().run();
+        new ExchangerTest().run();
     }
 }
 
@@ -254,5 +256,73 @@ class ScheduledExecutorServiceTest {
         }, 1, TimeUnit.SECONDS);
 
         service.shutdown();
+    }
+}
+
+/**
+ * 测试 Semaphore
+ */
+class SemaphoreTest{
+
+    Semaphore semaphore = new Semaphore(3,true);
+
+    public void run(){
+        for (int i = 0; i < 10; i++) {
+            final int finalI = i;
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        semaphore.acquire();
+                        System.out.println("do "+ finalI);
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    semaphore.release();
+                }
+            }.start();
+        }
+    }
+}
+
+/**
+ * 测试 Exchanger
+ */
+class ExchangerTest{
+
+    Exchanger<String> exchanger = new Exchanger<String>();
+
+    Thread t1 = new Thread(){
+        @Override
+        public void run() {
+            try {
+                String ret = exchanger.exchange("t1 -> t2");
+                System.out.println(ret);
+                ret = exchanger.exchange("t1 ->> t2");
+                System.out.println(ret);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    Thread t2 = new Thread(){
+        @Override
+        public void run() {
+            try {
+                String ret = exchanger.exchange("t2 -> t1");
+                System.out.println(ret);
+                ret = exchanger.exchange("t2 ->> t1");
+                System.out.println(ret);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    public void run(){
+        t2.start();
+        t1.start();
     }
 }

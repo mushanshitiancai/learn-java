@@ -1,4 +1,5 @@
 import javax.servlet.*;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,7 +8,7 @@ import java.util.Enumeration;
 /**
  * Created by mazhibin on 16/4/26
  */
-@WebServlet(name = "MyServlet--你好",urlPatterns = {"/my"})
+@WebServlet(name = "MyServlet你好",urlPatterns = {"/my"},initParams = {@WebInitParam(name = "name", value = "mushan")})
 public class MyServlet implements Servlet {
 
     private transient ServletConfig servletConfig;
@@ -41,11 +42,17 @@ public class MyServlet implements Servlet {
         System.out.println(servletRequest.getContentType());
         System.out.println(servletRequest.getProtocol());
         System.out.println(servletRequest.getParameterMap());
+        System.out.println(servletRequest.getCharacterEncoding());
 
         Enumeration<String> parameterNames = servletRequest.getParameterNames();
         while(parameterNames.hasMoreElements()){
             System.out.println(parameterNames.nextElement());
         }
+
+        System.out.println(servletConfig.getInitParameter("name"));
+
+        RequestDispatcher dispatcher = servletRequest.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(servletRequest, servletResponse);
     }
 
     @Override
