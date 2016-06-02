@@ -13,6 +13,7 @@
         <module>learn-base</module>
         <module>learn-test</module>
         <module>learn-redis</module>
+        <module>learn-algorithm</module>
     </modules>
 
 
