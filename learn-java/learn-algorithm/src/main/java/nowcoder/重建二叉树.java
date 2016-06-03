@@ -18,6 +18,8 @@ public class 重建二叉树 {
      *
      * 其实我的思路基本上是正确的了.但是我为了确定前序遍历中的分界线再次搜索了一遍导致复杂度增加,导致没写出来
      * 其实利用中序遍历中的搜索结果,就可以进行划分了.
+     *
+     * 重点: 确定边界条件是困难但是是很重要的事情,不能回避
      */
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
         return reConstructBinaryTreeImpl(pre,0,pre.length-1,in,0,in.length-1);
