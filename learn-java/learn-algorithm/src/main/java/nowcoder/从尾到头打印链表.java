@@ -48,12 +48,12 @@ public class 从尾到头打印链表 {
         List<Integer> r = new 从尾到头打印链表().printListFromTailToHead(l1);
         System.out.println(r);
     }
-}
 
-class ListNode {
-    int val;
-    ListNode next = null;
-    ListNode(int val) {
-        this.val = val;
+    static class ListNode {
+        int val;
+        ListNode next = null;
+        ListNode(int val) {
+            this.val = val;
+        }
     }
 }
