@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <bean id="fuzhou" class="City" p:name="fuzhou" p:state="china"/>
+
+    <util:list id="cityList">
+        <ref bean="fuzhou" />
+        <bean id="beijing" class="City" p:name="beijing" p:state="china"/>
+        <bean id="chengdu" class="City" p:name="chengdu" p:state="china"/>
+        <bean id="hokkaido" class="City" p:name="hokkaido" p:state="japan"/>
+        <bean id="tokyo" class="City" p:name="tokyo" p:state="japan"/>
+    </util:list>
+
+    <bean id="result" class="City" p:name="#{cityList.?[state eq 'japan'].toString()}" p:state="#{cityList.![name].toString()}" />
+</beans>
