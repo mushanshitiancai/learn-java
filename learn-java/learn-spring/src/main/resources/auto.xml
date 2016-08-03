@@ -6,7 +6,10 @@
 
     <context:annotation-config />
 
-    <bean id="sb" class="auto.Soldier" autowire="byName"/>
+    <bean id="sb" class="auto.Soldier">
+        <property name="weapon" ref="gun" />
+    </bean>
     <bean id="1" class="auto.Sword" />
     <bean id="weapon" class="auto.Sword" />
+    <bean id="gun" class="auto.Gun" />
 </beans>

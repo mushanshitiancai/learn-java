@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <property name="pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} + %msg%n"/>
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/%d{yyyy-MM-dd-HH-mm-ss}.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.mushan.learn" additivity="true">
+        <appender-ref ref="file" />
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="stdout" />
+    </root>
+</configuration>
