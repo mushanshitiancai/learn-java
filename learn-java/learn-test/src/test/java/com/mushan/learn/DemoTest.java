@@ -8,6 +8,8 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 /**
@@ -46,5 +48,18 @@ public class DemoTest {
     @Test
     public void testChild(){
         assertEquals(new Child().hi(),Child.class);
+    }
+
+
+    @Test
+    public void testMock(){
+        Book book = mock(Book.class);
+        when(book.getName()).thenReturn("fuck");
+
+        Child child = new Child();
+        child.setBook(book);
+
+        String name = child.getBook().getName();
+        assertEquals(name,"fuck");
     }
 }
