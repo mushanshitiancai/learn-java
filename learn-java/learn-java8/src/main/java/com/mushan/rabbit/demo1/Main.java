@@ -1,4 +1,4 @@
-package com.mushan;
+package com.mushan.rabbit.demo1;
 
 import java.util.*;
 import java.util.stream.Collectors;

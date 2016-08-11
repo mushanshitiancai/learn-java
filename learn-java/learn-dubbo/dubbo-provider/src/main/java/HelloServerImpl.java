@@ -1,4 +1,4 @@
-import com.mushan.HelloServer;
+import com.mushan.rabbit.demo1.HelloServer;
 
 /**
  * Created by mazhibin on 16/7/29

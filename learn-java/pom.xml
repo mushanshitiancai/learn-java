@@ -19,6 +19,8 @@
         <module>learn-mongo</module>
         <module>learn-dubbo</module>
         <module>learn-java8</module>
+        <module>learn-rabbitmq</module>
+        <module>learn-rocketmq</module>
     </modules>
 
 

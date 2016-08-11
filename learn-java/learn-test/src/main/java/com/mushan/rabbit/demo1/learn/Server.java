@@ -1,4 +1,4 @@
-package com.mushan.learn;
+package com.mushan.rabbit.demo1.learn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

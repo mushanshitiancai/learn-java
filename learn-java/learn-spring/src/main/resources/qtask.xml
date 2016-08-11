@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="qtask" class="task.QTask" />
+
+    <!-- 配置作业类 -->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 指定作业类 -->
+        <property name="targetObject" ref="qtask" />
+        <!-- 指定作业方法 -->
+        <property name="targetMethod" value="task" />
+        <!-- 设置是否并发执行作业 -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 配置作业调度的方式(触发器) -->
+    <bean id="triggers" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!-- 指定作业 -->
+        <property name="jobDetail" ref="jobDetail" />
+        <!-- 指定Cron表达式 -->
+        <property name="cronExpression" value="*/5 * * * * ?" />
+    </bean>
+
+    <!-- 配置调度工厂 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- 设置调度器开始工作的延迟 -->
+        <property name="startupDelay" value="10"/>
+        <!-- 指定需要触发的触发器 -->
+        <property name="triggers">
+            <list>
+                <ref bean="triggers" />
+            </list>
+        </property>
+    </bean>
+</beans>

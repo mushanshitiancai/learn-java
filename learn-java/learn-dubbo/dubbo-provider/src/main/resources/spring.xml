@@ -17,6 +17,6 @@
     <bean id="demoServer" class="DemoServerImpl" />
     <bean id="helloServer" class="HelloServerImpl" />
     <dubbo:service interface="DemoServer" ref="demoServer" />
-    <dubbo:service interface="com.mushan.HelloServer" ref="helloServer" />
+    <dubbo:service interface="com.mushan.rabbit.demo1.HelloServer" ref="helloServer" />
 
 </beans>

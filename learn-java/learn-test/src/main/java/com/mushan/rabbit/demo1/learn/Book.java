@@ -1,4 +1,4 @@
-package com.mushan.learn;
+package com.mushan.rabbit.demo1.learn;
 
 /**
  * Created by mazhibin on 16/8/3

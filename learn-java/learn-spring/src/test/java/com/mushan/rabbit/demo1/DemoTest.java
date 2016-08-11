@@ -1,4 +1,4 @@
-package com.mushan;
+package com.mushan.rabbit.demo1;
 
 import auto.Soldier;
 import org.junit.Test;

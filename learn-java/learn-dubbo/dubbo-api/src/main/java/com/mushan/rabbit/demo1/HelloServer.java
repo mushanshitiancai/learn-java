@@ -1,4 +1,4 @@
-package com.mushan;
+package com.mushan.rabbit.demo1;
 
 /**
  * Created by mazhibin on 16/7/29
