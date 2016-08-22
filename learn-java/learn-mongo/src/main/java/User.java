@@ -1,4 +1,5 @@
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -10,10 +11,21 @@ public class User {
 
     @Id
     private ObjectId id;
-    private String name;
-    private int age;
+    private String   name;
+    private int      age;
 
-    public User(){
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    @Embedded(value = "ss")
+    private School school;
+
+    public User() {
 
     }
 
@@ -26,6 +38,9 @@ public class User {
     public User(String name, int age) {
         this.name = name;
         this.age = age;
+
+        this.school = new School();
+        this.school.setName("hello");
     }
 
     public ObjectId getId() {

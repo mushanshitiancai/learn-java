@@ -15,7 +15,8 @@ public class Main {
 //        m.testStream();
 //        m.testStream2();
 //        m.testStream3();
-        m.testStream4();
+//        m.testStream4();
+        m.testStream5();
     }
 
     public void test1(){
@@ -112,7 +113,17 @@ public class Main {
         Map<Integer, String> collect = personList.stream().collect(Collectors.toMap(Person::getId, Person::getName,(c,n)->n));
         System.out.println(collect);
 
-        personList.
+    }
+
+    public void testStream5(){
+        List<Person> personList = Arrays.asList(
+                new Person(1,"mzb"),
+                new Person(2,"fuck"),
+                new Person(1,"hehe")
+        );
+
+        personList.forEach(o -> o.setName("after"));
+        System.out.println(personList);
     }
 
     class Person{
@@ -138,6 +149,14 @@ public class Main {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "Id=" + Id +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
 }

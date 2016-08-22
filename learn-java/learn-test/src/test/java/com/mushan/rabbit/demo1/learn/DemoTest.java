@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertEquals;
@@ -61,5 +62,10 @@ public class DemoTest {
 
         String name = child.getBook().getName();
         assertEquals(name,"fuck");
+    }
+
+    @Test
+    public void testGUID(){
+        System.out.println(UUID.randomUUID());
     }
 }
