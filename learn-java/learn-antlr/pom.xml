@@ -9,11 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>learn-rest</artifactId>
+    <artifactId>learn-antlr</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>learn-esayrest</module>
-        <module>learn-resteasy-spring</module>
+        <module>learn-stringtemplate</module>
     </modules>
 
 

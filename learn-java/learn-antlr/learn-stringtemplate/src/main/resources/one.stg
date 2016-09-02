@@ -1,0 +1,3 @@
+say(name) ::= "hello, <name:{x|[<x>]};separator=\",\">"
+bracket(x) ::= "(<x>)"
+introduction(person) ::= "I'm <person.name>, I'm <person.age> years old."

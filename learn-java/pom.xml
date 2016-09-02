@@ -22,6 +22,8 @@
         <module>learn-rabbitmq</module>
         <module>learn-rocketmq</module>
         <module>learn-rest</module>
+        <module>learn-antlr</module>
+        <module>learn-proto</module>
     </modules>
 
 
