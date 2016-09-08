@@ -27,7 +27,18 @@ public class BasicTest {
             return 3;
         }
     }
+
+    @Test
+    public void subStringTest(){
+
+    }
 }
+
+class SubString extends String{
+
+}
+
+
 class StaticTest{
 
 

@@ -12,7 +12,10 @@
 
 
     <dubbo:reference id="demoServer" interface="DemoServer" />
+    <dubbo:reference id="helloServer" interface="com.mushan.rabbit.demo1.HelloServer" />
+
     <bean id="demoAction" class="DemoAction">
         <property name="server" ref="demoServer" />
+        <property name="helloServer" ref="helloServer" />
     </bean>
 </beans>

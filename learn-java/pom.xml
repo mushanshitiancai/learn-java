@@ -24,6 +24,8 @@
         <module>learn-rest</module>
         <module>learn-antlr</module>
         <module>learn-proto</module>
+        <module>learn-guice</module>
+        <module>learn-guava</module>
     </modules>
 
 

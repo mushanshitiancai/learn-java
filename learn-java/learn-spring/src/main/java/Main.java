@@ -1,7 +1,6 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 //        test1();
 //        test2();
-        jdbcTest();
+//        jdbcTest();
     }
 
     public static void jdbcTest() {

@@ -5,4 +5,5 @@ package com.mushan.rabbit.demo1;
  */
 public interface HelloServer {
     String getHello(String name);
+    FolderType getNum(int num);
 }
