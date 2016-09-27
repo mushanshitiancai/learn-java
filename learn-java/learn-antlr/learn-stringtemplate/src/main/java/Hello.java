@@ -2,6 +2,8 @@ import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
 
+import java.util.Arrays;
+
 /**
  * Created by mazhibin on 16/9/1
  */
@@ -28,8 +30,8 @@ public class Hello {
     public static void test3(){
         STGroupFile stGroupFile = new STGroupFile(Hello.class.getResource("/one.stg").getPath());
         ST st = stGroupFile.getInstanceOf("say");
-        st.add("name","mushan");
-        st.add("name","willing");
+        st.add("name", Arrays.asList("mushan","willing"));
+        st.add("person",new Person());
         System.out.println(st.render());
 
         st = stGroupFile.getInstanceOf("introduction");

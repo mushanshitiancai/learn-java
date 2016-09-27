@@ -6,6 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 /**
  * Created by mazhibin on 16/7/28
@@ -13,7 +14,23 @@ import org.mongodb.morphia.Morphia;
 public class Main {
     public static void main(String[] args) {
 //        mongoDriverTest();
-        morphiaTest();
+//        morphiaTest();
+//        morphiaTest2();
+        System.out.println("fs".hashCode());
+    }
+
+    private static void morphiaTest2() {
+        MongoClient client = new MongoClient("localhost",27017);
+        Morphia morphia = new Morphia();
+        Datastore datastore = morphia.createDatastore(client,"hello");
+        datastore.ensureIndexes();
+
+        Query<EnumEntity> query = datastore.createQuery(EnumEntity.class);
+        query.field("name").equal("2");
+        EnumEntity enumEntity = query.get();
+
+        enumEntity.setName("hehe");
+        datastore.save(enumEntity);
     }
 
     private static void mongoDriverTest(){

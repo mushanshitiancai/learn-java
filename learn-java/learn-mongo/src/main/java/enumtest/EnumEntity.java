@@ -2,10 +2,7 @@ package enumtest;
 
 import lombok.Data;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Converters;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.*;
 
 /**
  * Created by mazhibin on 16/9/7
@@ -18,6 +15,9 @@ public class EnumEntity {
     ObjectId id;
 
     String name;
+
+    @Embedded("in")
+    In in;
 
     @Property("nodeType")
     NodeType nt;
