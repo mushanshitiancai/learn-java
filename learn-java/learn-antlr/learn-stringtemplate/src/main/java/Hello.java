@@ -3,6 +3,7 @@ import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by mazhibin on 16/9/1
@@ -32,6 +33,7 @@ public class Hello {
         ST st = stGroupFile.getInstanceOf("say");
         st.add("name", Arrays.asList("mushan","willing"));
         st.add("person",new Person());
+        st.add("map",new HashMap<String,String>(){{put("a","map a");}});
         System.out.println(st.render());
 
         st = stGroupFile.getInstanceOf("introduction");

@@ -28,6 +28,10 @@
         <module>learn-guava</module>
         <module>learn-json</module>
         <module>learn-log</module>
+        <module>learn-java7</module>
+        <module>learn-codegenerate</module>
+        <module>learn-aop</module>
+        <module>learn-http</module>
     </modules>
 
 

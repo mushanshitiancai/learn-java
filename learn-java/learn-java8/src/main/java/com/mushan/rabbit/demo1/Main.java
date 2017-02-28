@@ -16,7 +16,20 @@ public class Main {
 //        m.testStream2();
 //        m.testStream3();
 //        m.testStream4();
-        m.testStream5();
+//        m.testStream5();
+        m.testMore();
+    }
+
+    private void testMore() {
+        add(1,2,3);
+        int[] arr = {5,6,7};
+        add(arr);
+    }
+
+    public void add(int... a){
+        for (int i : a) {
+            System.out.println(i);
+        }
     }
 
     public void test1(){

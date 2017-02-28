@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_DIR" value="logs"/>
+    <property name="COMMON_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{0} - %msg%n"/>
+
+    <!-- - - - - - - - appender - - - - - - -  -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${COMMON_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <appender name="console2" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>fuck %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="log-common-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/fs-common.log</file>
+        <encoder>
+            <pattern>${COMMON_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/fs-common-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <CleanHistoryOnStart>true</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+    <appender name="log-exception-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/fs-exception.log</file>
+        <encoder>
+            <pattern>${COMMON_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/fs-exception-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <CleanHistoryOnStart>true</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="log-slow-file" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/fs-show.log</file>
+        <encoder>
+            <pattern>${COMMON_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="log-third-lib-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/fs-third-lib.log</file>
+        <encoder>
+            <pattern>${COMMON_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/fs-third-lib-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>10</MaxHistory>
+            <CleanHistoryOnStart>true</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- - - - - - - - logger - - - - - - -  -->
+    <logger name="com.facishare.netdisk.biz" level="info" additivity="false">
+        <appender-ref ref="log-common-file"/>
+    </logger>
+    <logger name="com.facishare.netdisk.biz.aop.ActionMonitorAspect.SlowLog" level="info" additivity="false">
+        <appender-ref ref="log-slow-file"/>
+    </logger>
+    <logger name="com.facishare.netdisk.biz.handler.FCPExceptionHandler" level="info" additivity="false">
+        <appender-ref ref="log-exception-file"/>
+    </logger>
+
+    <logger name="com.mushan" level="debug" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="log-common-file"/>
+    </logger>
+
+    <logger name="com" level="debug" additivity="false">
+        <appender-ref ref="console2" />
+    </logger>
+
+    <root level="warn">
+        <appender-ref ref="console"/>
+        <appender-ref ref="log-third-lib-file"/>
+    </root>
+</configuration>

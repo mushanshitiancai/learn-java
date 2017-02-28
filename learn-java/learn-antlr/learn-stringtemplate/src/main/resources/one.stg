@@ -1,7 +1,8 @@
-say(name,person) ::= <<
+say(name,person,map) ::= <<
 hello, <name:{x|[<x>]};separator=",">
 hello2, <person.name:{x|[<x>]}>
 hello3, <person.func>
+hello map, <map.a>
 >>
 bracket(x) ::= "(<x>)"
 introduction(person) ::= "I'm <person.name>, I'm <person.age> years old."

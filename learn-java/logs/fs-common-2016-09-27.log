@@ -1,0 +1,4 @@
+2016-09-27 16:33:55 [main] DEBUG Main - ======debug
+2016-09-27 16:33:55 [main] INFO  Main - ======info
+2016-09-27 16:33:55 [main] WARN  Main - ======warn
+2016-09-27 16:33:55 [main] ERROR Main - ======error
