@@ -1,9 +1,12 @@
 package aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
@@ -50,6 +53,11 @@ public class Profile {
 
     @Around("play(name)")
     public String around(ProceedingJoinPoint joinPoint, String name) {
+        Signature signature = joinPoint.getSignature();
+        if(signature instanceof MethodSignature){
+            Method method = ((MethodSignature) signature).getMethod();
+        }
+
         System.out.println(">> around "+name);
         try {
             System.out.println(joinPoint.getSignature().getName());

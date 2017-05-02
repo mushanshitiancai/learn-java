@@ -73,7 +73,7 @@ public class GenGetterSetter {
     }
     
     public static void test() throws IOException {
-        String inputPathStr = "/Users/mazhibin/project/fs/fs-organization/fs-organization-api/src/main/java/com/facishare/organization/api/model/employee/arg/BatchModifyEmployeeStopArg.java";
+        String inputPathStr = "/Users/mazhibin/project/fs/fs-organization/fs-organization-api/src/main/java/com/facishare/organization/api/model/employee/arg/BatchUpdateEmployeeStatusArg.java";
 
         String content = FileUtils.readFileToString(new File(inputPathStr), Charset.defaultCharset());
         CompilationUnit cu = JavaParser.parse(content);

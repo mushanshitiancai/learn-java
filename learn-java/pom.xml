@@ -32,6 +32,10 @@
         <module>learn-codegenerate</module>
         <module>learn-aop</module>
         <module>learn-http</module>
+        <module>learn-groovy</module>
+        <module>learn-elasticsearch</module>
+        <module>learn-spring-javaconfig</module>
+        <module>learn-javafx</module>
     </modules>
 
 

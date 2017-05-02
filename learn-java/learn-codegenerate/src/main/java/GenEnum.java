@@ -11,29 +11,30 @@ import java.util.regex.Pattern;
 public class GenEnum {
 
     public static void main(String[] args) throws IOException {
-        String inputFilePathStr = "/Users/mazhibin/project/fs/fs-organization/fs-organization-provider/src/main/java/com/facishare/organization/provider/dao/entity/type/EmployeeUpdateCause.java";
-        String input = FileUtils.readFileToString(new File(inputFilePathStr),"utf-8");
-        
-        
-        Pattern enumNamePattern = Pattern.compile("enum (\\w+)");
-        Pattern enumItemPattern = Pattern.compile("(\\w+)\\((\\d+)\\),");
+        String inputFilePathStr = "/Users/mazhibin/project/java/learn-java/learn-java/learn-codegenerate/src/main/resources/InvitePersonStatus.java";
+        String input = FileUtils.readFileToString(new File(inputFilePathStr), "utf-8");
+
+
+        Pattern enumNamePattern = Pattern.compile("enum +(\\w+)");
+        Pattern enumItemPattern = Pattern.compile("(\\w+)\\((\\d+).*?\\),");
         StringBuffer result = new StringBuffer();
 
         Matcher matcher = enumNamePattern.matcher(input);
-        if(matcher.find()){
-            String enumName = matcher.group(1);
-            result.append(String.format("public static %s valueOf(int tag) {\n",enumName));
-        }
+        if (!matcher.find())
+            throw new RuntimeException("没找到对应的enumName");
+
+        String enumName = matcher.group(1);
+        result.append(String.format("public static %s valueOf(int tag) {\n", enumName));
         result.append("    switch(tag) {\n");
 
         matcher = enumItemPattern.matcher(input);
-        while(matcher.find()){
+        while (matcher.find()) {
             String key = matcher.group(1);
             String value = matcher.group(2);
 
-            result.append(String.format("        case %s: return %s;\n",value,key));
+            result.append(String.format("        case %s: return %s;\n", value, key));
         }
-        result.append("        default: return null;\n");
+        result.append("        default: throw new IllegalArgumentException(\"").append(enumName).append(" not fount type= \" + tag );\n");
         result.append("    }\n");
         result.append("}\n");
 

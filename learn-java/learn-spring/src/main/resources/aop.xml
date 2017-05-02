@@ -8,5 +8,4 @@
     <context:component-scan base-package="aop" />
     <aop:aspectj-autoproxy/>
 
-    <bean id="profileAspect" class="aop.ProfileAspect" factory-method="aspectOf" />
 </beans>

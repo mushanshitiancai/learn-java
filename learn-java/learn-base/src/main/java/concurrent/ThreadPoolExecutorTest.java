@@ -1,9 +1,8 @@
 package concurrent;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * Created by mazhibin on 16/11/17
@@ -13,6 +12,8 @@ public class ThreadPoolExecutorTest {
     public static void main(String[] args) throws InterruptedException {
 //        test1();
 //        test2();
+//        callableThrowTest();
+        poolThrowTest();
     }
 
     // 最基本的使用
@@ -69,8 +70,122 @@ public class ThreadPoolExecutorTest {
         }
     }
 
-    // 获取任务的返回结果
-    synchronized public void test(){
 
+    public static void threadThrowTest() {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+//        for (int i = 0; i < 10; i++) {
+//            final int ii = i;
+//            executorService.submit(() -> {
+//                
+//                Thread.sleep(100);
+//                
+//                if(ii == 6) {
+//                    throw new IllegalArgumentException();
+//                }
+//                System.out.println(ii);
+//                return ii;
+//            });
+//        }
+
+//        for (int i = 0; i < 10; i++) {
+//            final int ii = i;
+//            executorService.submit(new Runnable() {
+//                @Override
+//                public void run() {
+//                    System.out.println(ii/0);
+//                }
+//            });
+//        }
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                System.out.println(1 / 0);
+            }
+        };
+        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                System.out.println(e);
+            }
+        });
+        thread.start();
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(thread.getState());
+
+
+    }
+
+    public static void callableThrowTest() {
+        Callable<Integer> callable = new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return 1 / 0;
+            }
+        };
+
+        FutureTask<Integer> task = new FutureTask<>(callable);
+        Thread thread = new Thread(task);
+
+        thread.start();
+        try {
+            Integer integer = task.get();
+            System.out.println(integer);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void poolThrowTest() {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(1);
+                System.out.println(1/0);
+            }
+        });
+
+//        List<Future<?>> futures = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            final int ii = i;
+//            Future<?> submit = executorService.submit(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Thread.sleep(100*ii);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    System.out.println(ii);
+//
+//                    if (ii == 6) {
+//                        System.out.println(1 / 0);
+//                    }
+//                }
+//            });
+//
+//            futures.add(submit);
+//        }
+//
+//        for (Future<?> future : futures) {
+//            try {
+//                future.get();
+//            } catch (InterruptedException e) {
+//                System.out.println("1" + e);
+//            } catch (ExecutionException e) {
+//                System.out.println("2" + e);
+//                e.printStackTrace();
+//            }
+//        }
     }
 }
