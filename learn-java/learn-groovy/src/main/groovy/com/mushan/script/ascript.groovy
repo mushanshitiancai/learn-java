@@ -57,3 +57,5 @@ a.metaClass.func2 = {
 //}
 a.func2()
 
+def f = new File("")
+f.getText()

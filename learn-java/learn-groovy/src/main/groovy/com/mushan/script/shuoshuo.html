@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>说说</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="shuoshuo.js"></script>
+    <script>
+        $(function () {
+            msgList.forEach(function (msg) {
+                $("body").append(genItem(msg))
+            });
+
+            function genItem(msg) {
+                var item = $(`<div><div><p>${msg.content}</p></div></div>`);
+                var imgDiv = $(`<div></div>`);
+                item.append(imgDiv);
+
+                if (msg.pic) {
+                    msg.pic.forEach(function (pic) {
+                        imgDiv.append(genImageItem(pic));
+                    });
+                }
+
+                return item;
+            }
+
+            function genImageItem(picItem) {
+                return $(`<img src="http://www.beihaiw.com/pic.php?url=${picItem.url1}">`)
+            }
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

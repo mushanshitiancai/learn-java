@@ -9,10 +9,25 @@ class Main {
         
         assert people.age == 100
         assert people.getProperty("age") == 100
+        
+        people.metaClass.fun = {println "funx"}
+        
+        people.fun()
+        people.callFun()
+        
+        "hello--".printx()
     }
 }
 
 class People{
     String name
     int age
+    
+    def fun(){
+        println "fun"
+    }
+    
+    def callFun(){
+        fun()
+    }
 }
