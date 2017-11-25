@@ -1,4 +1,5 @@
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -8,10 +9,15 @@ import java.util.Enumeration;
 /**
  * Created by mazhibin on 16/4/26
  */
-@WebServlet(name = "MyServlet你好",urlPatterns = {"/my"},initParams = {@WebInitParam(name = "name", value = "mushan")})
+@WebServlet(name = "MyServlet你好",urlPatterns = {"/my/*"},initParams = {@WebInitParam(name = "name", value = "mushan")})
+@MultipartConfig
 public class MyServlet implements Servlet {
 
     private transient ServletConfig servletConfig;
+
+    static {
+        System.out.println("MyServlet");
+    }
 
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
@@ -28,10 +34,10 @@ public class MyServlet implements Servlet {
         String servletName = servletConfig.getServletName();
         servletResponse.setContentType("text/html");
 
-        PrintWriter writer = servletResponse.getWriter();
+//        PrintWriter writer = servletResponse.getWriter();
 
         servletResponse.setCharacterEncoding("utf-8");
-        writer.print(servletName + "23");
+//        writer.print(servletName + "23");
 
         Enumeration<String> attributeNames = servletRequest.getAttributeNames();
         while(attributeNames.hasMoreElements()){
@@ -51,7 +57,7 @@ public class MyServlet implements Servlet {
 
         System.out.println(servletConfig.getInitParameter("name"));
 
-        RequestDispatcher dispatcher = servletRequest.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = servletRequest.getRequestDispatcher("/demo");
         dispatcher.forward(servletRequest, servletResponse);
     }
 

@@ -1,4 +1,4 @@
-package com.mushan.rabbit.spring;
+package com.mushan.rabbit.spring.direct;
 
 /**
  * Created by mazhibin on 16/8/8
