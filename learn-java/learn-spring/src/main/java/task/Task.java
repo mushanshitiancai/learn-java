@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by mazhibin on 16/8/5
  */
-@Component("task")
+//@Component("task")
 public class Task {
 
     @Scheduled(cron = "1 * * * * ?")

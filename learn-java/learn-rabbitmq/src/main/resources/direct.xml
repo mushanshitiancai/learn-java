@@ -3,24 +3,24 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
-    <rabbit:connection-factory id="connectionFactory" host="localhost" />
+    <rabbit:connection-factory id="connectionFactory" host="cl-dev-rabbitmq-ndss-m98rq6.docker.sdp" port="6055" username="ndss_dev_nl9EAk" password="oqENVfQVqOsV" />
 
     <rabbit:admin connection-factory="connectionFactory" />
 
     <rabbit:queue name="myQueue" />
 
-    <rabbit:topic-exchange name="myExchange">
+    <rabbit:direct-exchange name="testDirectExchange">
         <rabbit:bindings>
-            <rabbit:binding queue="myQueue" pattern="fooz.*" />
+            <rabbit:binding queue="myQueue"/>
         </rabbit:bindings>
-    </rabbit:topic-exchange>
+    </rabbit:direct-exchange>
 
     <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"
-                     exchange="myExchange" routing-key="foo.bar" />
+                     exchange="testDirectExchange" routing-key="myQueue"/>
 
     <rabbit:listener-container connection-factory="connectionFactory">
         <rabbit:listener ref="consumer" method="listen" queue-names="myQueue" />
     </rabbit:listener-container>
 
-    <bean id="consumer" class="com.mushan.rabbit.spring.Consumer" />
+    <bean id="consumer" class="com.mushan.rabbit.spring.direct.Consumer" />
 </beans>

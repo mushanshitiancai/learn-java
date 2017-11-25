@@ -17,23 +17,29 @@ public class Recv {
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
         //建立服务器连接,获取通道
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("cl-dev-rabbitmq-ndss-m98rq6.docker.sdp");
+        factory.setPort(6055);
+        factory.setUsername("ndss_dev_nl9EAk");
+        factory.setPassword("oqENVfQVqOsV");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
         //声明一个队列
-        channel.queueDeclare(QUEUE_NAME,false,false,false,null);
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println("Waiting for message...");
 
         //定义一个消费者
         QueueingConsumer consumer = new QueueingConsumer(channel);
-        channel.basicConsume(QUEUE_NAME,true,consumer);
+        channel.basicConsume(QUEUE_NAME, false, consumer);
 
         //从队列中获取消息并消费
-        while (true){
+        while (true) {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String msg = new String(delivery.getBody());
-            System.out.println("Received msg: "+msg);
+            System.out.println("Received msg: " + msg);
+
+//            long deliveryTag = delivery.getEnvelope().getDeliveryTag();
+//            channel.basicAck(deliveryTag, false);
         }
     }
 }

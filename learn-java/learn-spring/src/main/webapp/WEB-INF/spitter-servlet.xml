@@ -2,32 +2,43 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd"
+>
 
-    <mvc:resources mapping="/resources/**" location="/resources/" />
-    <context:component-scan base-package="web" />
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <context:component-scan base-package="web"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost/test" />
-        <property name="username" value="root" />
-        <property name="password" value="111" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="111"/>
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource" />
+        <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <mvc:annotation-driven>
         <mvc:path-matching path-matcher="pathMatcher"/>
     </mvc:annotation-driven>
-    
+
     <bean id="pathMatcher" class="org.springframework.util.AntPathMatcher">
         <property name="caseSensitive" value="false"/>
     </bean>
+
 </beans>
